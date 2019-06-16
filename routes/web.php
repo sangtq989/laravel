@@ -14,3 +14,113 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home',function(){
+	return "hello world - home";
+});
+
+//1 - get
+Route::get('/demo/laravel', function(){
+	return "This is method GET";
+});
+
+//2 - post
+Route::post('/demo-post',function(){
+	return "This is demo POST";
+});
+
+//3 - put
+Route::put('demo-put',function(){
+	return "this is PUT";
+});
+
+//4-match
+//cho phep 1 request co the lam viec voi nhieu phuong thuc route
+Route::match(['get','post','put'],'demo-match',function (){
+	return "this is match method";
+});
+
+//5- any cho phep lam viec voi tat ca method
+Route::any('demo-method-any',function(){
+	return "This is method any";
+});
+
+//6-truyen tham so vao route
+Route::get('samsung/{nameproduct}',function($name){
+	return "samsung - {$name}";
+});
+Route::get('iphone/{id}/{nameProduct?}',function($id,$name = null){
+	return "iphone - {$name} - {$id}";
+});
+//7 - route tra ve view
+Route::view('demo-view','demo');
+//demo la ten cua file view
+
+//dieu huong - chuyen huong 
+Route::get('xem-phim',function(){
+	return redirect('demo-view');
+});
+//chuyen thang tu '/home' ve '/'
+Route::redirect('/home','/',301);
+
+
+//regular expression Constrain
+//kiem tra - validate tham so cua route
+Route::get('phim-hay/tap/{num}',function($number){
+	return "Ban dang xem tap {$number}";
+})->where('num','\d+');
+
+//kiem tra 2 hoac nhieu tham so 1 luc
+Route::get('phim-hay/{nameFilm}/tap/{tap}',function($name,$chapter){
+	return "ban dang xem phim {$name} tap {$chapter}";
+})->where([	
+	'nameFilm' => '[A-Za-z0-9]+',
+	'tap' => '\d+' 
+]);
+
+// Route::get('/product/{id}',function($id){
+// 		return "Ban dang xem sp {$id}";
+// });
+Route::get('/music/{id}',function($id){
+		return "Ban dang xem bai {$id}";
+})->where('id','\d+')->name('music');
+
+
+Route::get('nghe-nhac',function(){
+	//return redirect('music/10');
+	return redirect()->route('music',['id'=>10]);
+});
+
+//get info url 
+
+Route::get('info-url',function(){
+	$url = route('music',['id'=>100]);
+	echo "<pre>";
+	print_r($url);
+});
+
+
+///Route group
+//nhom cac route thanh 1 nhom
+Route::group([
+	'prefix' =>'admin', //fix duong dan thanh admin/...
+	'namespace'=>'Test',//ten namespace
+	'as' => 'admin.'
+],function(){
+	Route::get('dashbroad',function(){
+		return "this is admin dashbroad";
+	})->name('dash');
+	Route::get('profile',function(){
+		//return "this is admin profile";
+		return redirect()->route('admin.dash');
+	})->name('prf');
+	Route::get('demo-namespace','DemoController@index')->name('demoNameSpace');
+});
+///fallback neu sai route no se ve trang bao loi
+Route::fallback(function(){
+	return redirect('/');
+});
+//su dung middleware
+
+Route::get('xem-phim-a/{age}',function(){
+	return "ban da du tuoi xem phim";
+})->middleware('myCheckAge');
