@@ -116,11 +116,42 @@ Route::group([
 	Route::get('demo-namespace','DemoController@index')->name('demoNameSpace');
 });
 ///fallback neu sai route no se ve trang bao loi
-Route::fallback(function(){
-	return redirect('/');
-});
+// Route::fallback(function(){
+// 	return redirect('/');
+// });
 //su dung middleware
 
 Route::get('xem-phim-a/{age}',function(){
 	return "ban da du tuoi xem phim";
 })->middleware('myCheckAge');
+
+//
+
+Route::get('kiem-tra-chan-le/{number}',function($num){
+	return "{$num} la so chan";
+})->middleware('myCheckNumber:admin');// admin la tham so cua middleware
+
+Route::get('test-num',function(){
+	return "test";
+});
+//su dung router va controller
+
+Route::get('test-controller/{name}','TestController@demo')->name('testController');
+//
+Route::get('test-demo','TestController@testDemo')->name('testDemo');
+//
+Route::get('index','TestController@index')->name('testIndex');
+//
+Route::get('profile/{name}/{id}','TestController@profile')->name('profile');
+//
+Route::get('detail-profile/{id}','TestController@detailProfile');
+//
+Route::get('demo-login','TestController@login')->name('frmLogin');
+//
+Route::post('handle-login','TestController@handleLogin')->name('handleLogin');//name giong voi khai bao o html
+//
+Route::get('template-blade','TestController@template')->name('template');
+//
+Route::get('test-home','TestController@testHome')->name('testHome');
+Route::get('test-about','TestController@testAbout')->name('testAbout');
+

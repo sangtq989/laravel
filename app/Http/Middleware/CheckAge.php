@@ -20,6 +20,8 @@ class CheckAge
         if ($age<18) {
             return redirect('/');
         }
+        //neu vuot qua thi se dc tieo tuc thuc thi request
+        //neu khong dung lai request
         // cho phep thuc thi cac request tiep theo
         return $next($request);
     }
