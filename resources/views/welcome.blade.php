@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <style>
+
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -18,6 +19,9 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+            }
+            a{
+                text-decoration: none;
             }
 
             .full-height {
@@ -81,7 +85,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <a href="{{ url('admin/login') }}">LARAVEL</a>
                 </div>
 
                 <div class="links">
