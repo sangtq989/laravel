@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'myCheckAge'=> \App\Http\Middleware\CheckAge::class,
         'myCheckNumber'=> \App\Http\Middleware\checkNumber::class,
         'testMiddlewareontroller'=> \App\Http\Middleware\TestMiddlewareController::class,
+        'adminLogined'=>  \App\Http\Middleware\CheckAdminLogined::class,
+        'isLogined' => \App\Http\Middleware\isLogined::class,
     ];
 
     /**

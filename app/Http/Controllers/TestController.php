@@ -52,11 +52,38 @@ class TestController extends Controller
 
 	}
 	public	function testHome(){
-		$data=[
-			'name'=>'sangtq',
-			'age'=> 20,
-			'phone' => 123123,
+		$data = [];
+
+		$data['lstInfoStudent']=[
+			[
+				'msv' =>'123',
+				'name'=>'sangtq',
+				'age'=> 20,
+				'phone' => 123123,
+				'money' => 213123,
+				'gender' => 0,
+			],
+			[
+				'msv' =>'123',
+				'name'=>'sang2',
+				'age'=> 22,
+				'phone' => 123123,
+				'money' => 555,
+				'gender' => 1,
+			],
+			[
+			'msv' =>'123',
+			'name'=>'sang3',
+			'age' => 44,
+			'phone' => 23423,
+			'money' => 1233,
+			'gender' => 0,
+			]
+
 		];
+		
+
+
 		return view('home.indexhome',$data);
 	}
 	public function testAbout(){

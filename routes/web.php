@@ -155,3 +155,35 @@ Route::get('template-blade','TestController@template')->name('template');
 Route::get('test-home','TestController@testHome')->name('testHome');
 Route::get('test-about','TestController@testAbout')->name('testAbout');
 
+//
+Route::group([ 
+		'prefix'=>'query',
+		'namespace'=>'Test'
+],function(){
+	Route::get('select','QueryController@select')->name('select');
+	Route::get('orm','QueryController@demoORM')->name('ORM');
+});
+
+
+
+
+/*****************Route blog Admin***********************/
+Route::group([
+	'prefix' =>'admin', //fix duong dan thanh admin/...
+	'namespace'=>'Admin',//ten namespace
+	'as' => 'admin.',
+	
+],function(){
+	Route::get('/login','AccountController@viewLogin')->name('viewLogin')->middleware('isLogined');
+	Route::post('/handle-login','AccountController@handleLogin')->name('handleLogin');
+	Route::post('/logout','AccountController@logout')->name('logout');
+});
+
+Route::group([
+	'prefix' =>'admin', //fix duong dan thanh admin/...
+	'namespace'=>'Admin',//ten namespace
+	'as' => 'admin.',
+	'middleware' => ['web','adminLogined']
+],function(){
+	Route::get('dashboard','DashboardController@index')->name('dashboard');
+});
