@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Dashboard</title>
+  <title>Admin - @yield('title')</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -89,25 +89,25 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <span>Trang chu</span>
         </a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>Quan ly</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register.html">Register</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+          <h6 class="dropdown-header">Bai viet:</h6>
+          <a class="dropdown-item" href="{{ route('admin.listPosts') }}">Danh sach bai viet</a>
+          <a class="dropdown-item" href="{{ route('admin.createPosts') }}">Viet bai</a>
+          
           <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Other Pages:</h6>
-          <a class="dropdown-item" href="404.html">404 Page</a>
-          <a class="dropdown-item" href="blank.html">Blank Page</a>
+          <h6 class="dropdown-header">Danh muc - tag:</h6>
+          <a class="dropdown-item" href="404.html">Danh muc</a>
+          <a class="dropdown-item" href="blank.html">Tag</a>
         </div>
       </li>
       <li class="nav-item">
@@ -180,7 +180,8 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('admin/js/sb-admin.min.js') }}"></script>
-
+ {{--  <script src="{{ asset('admin/js/ckeditor.js') }}"></script> --}}
+  <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
   @stack('scripts')
 
 </body>
