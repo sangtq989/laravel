@@ -17,7 +17,7 @@
 </style>
 <div class="row">
 	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-		<h1>Tao bai viet</h1>
+		<h1>SUA bai viet</h1>
 		@if ($errors->any())
 		    <div class="alert alert-danger my-3">
 		        <ul>
@@ -27,17 +27,23 @@
 		        </ul>
 		    </div>
 		@endif
-		<form action="{{ url('admin/handle') }}" method="POST" class="mt-3 w-100" enctype="multipart/form-data">
+		@if ($errUpload)
+		  <div class="alert alert-danger">
+		  	{{ $errUpload }}
+		  </div>
+		@endif
+		
+		<form action="{{ route('admin.handleEdit',['id'=>$post->id]) }}" method="POST" class="mt-3 w-100" enctype="multipart/form-data">
 		@csrf
 			<div class="row">
 				<div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
 					<div class="form-group">
 						<label for="titlePost">Title</label>
-						<input type="text" class="form-control" id="titlePost" name="titlePost" >
+						<input type="text" class="form-control" id="titlePost" name="titlePost" value="{{ $post->title }}">
 					</div>
 					<div class="form-group">
 						<label for="sapoPost">Sapo</label>
-						<textarea class="form-control" id="sapoPost" name="sapoPost"></textarea>  
+						<textarea class="form-control" id="sapoPost" name="sapoPost">{!! $post->sapo !!}</textarea>  
 					</div>
 					<div class="form-group">
 						<label for="avatarPost">Thumbnail</label>
@@ -45,7 +51,7 @@
 					</div>
 					<div class="form-group">
 						<label for="contentPost">Content</label>
-						<textarea class="form-control" id="contentPost" name="contentPost" rows="10"></textarea>  
+						<textarea class="form-control" id="contentPost" name="contentPost" rows="10">{!!$post->content_web !!}</textarea>  
 					</div>
 
 				</div>
@@ -53,8 +59,8 @@
 					<div class="form-group">
 						<label for="language">Language</label>
 						<select class="form-control" name="language" id="language">
-							<option value="0">English</option>
-							<option value="1">Tieng viet</option>
+							<option value="0" {{ $post->lang_id == 0 ? 'selected' : '' }}>English</option>
+							<option value="1" {{ $post->lang_id == 1 ? 'selected' : '' }}>Tieng viet</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -62,24 +68,33 @@
 						<select class="form-control" name="categories" id="categories">
 							<option>---Choose categories</option>
 							@foreach($cate as $key => $value)
-								<option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
+								<option value="{{ $value['id'] }}" {{ $post->categories_id == $value['id'] ? 'selected=selected' : '' }}>{{ $value['name'] }}</option>
 							@endforeach
 						</select>
 					</div>
+
+
+					<div class="form-group">
+						<label for="avatar"></label>
+						<img src="{{ URL::to('/') }}/upload/images/{{ $post->avatar }}" alt="avatar" class="w-100">
+					</div>
+
+
 					<div class="form-group">
 						<label for="tags">Tag</label>
-						<select name="tags[]" id="tags" multiple="multiple">
-							
+						<select name="tags[]" id="tags" multiple="multiple">							
 							@foreach($tag as $key => $value)
-								<option value="{{ $value['id'] }}">{{ $value['name'] }}</option>
+								<option value="{{ $value['id'] }}" {{ in_array($value['id'], $post_tag2) ? 'selected=selected' : '' }}>
+									{{ $value['name'] }}
+								</option>
 							@endforeach
 						</select>
 					</div>
 					<div class="form-group">
 						<label>Publish date</label>
-						<input type="checkbox" class="ml-3" checked="checked" name="publishPost">
+						<input type="checkbox" class="ml-3" {{ $post->status == 1 ? 'checked' : '' }} name="publishPost">
 					</div>
-					<button class="btn btn-primary" type="submit">Save</button>
+					<button class="btn btn-primary" type="submit">Update</button>
 				</div>
 			</div>
 		</form>

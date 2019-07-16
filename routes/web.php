@@ -189,4 +189,7 @@ Route::group([
 	Route::get('list-posts','PostsController@index')->name('listPosts');
 	Route::get('create-posts','PostsController@createPosts')->name('createPosts');
 	Route::post('handle','PostsController@handleCreatePost')->name('handlePost');
+	Route::post('/delete-post','PostsController@deletePost')->name('deletePost');
+	Route::get('{slug}/{id}','PostsController@editPost')->name('editPost');
+	Route::post('handle-edit/{id}','PostsController@handleEdit')->name('handleEdit');
 });
