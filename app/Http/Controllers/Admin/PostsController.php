@@ -29,9 +29,13 @@ class PostsController extends Controller
                 $query->orWhere('a.publish_date','like',"%{$keyword}%");
             })
             ->where('a.status', 1)          
-            ->get();
+            ->paginate(2);
+            $mainData= json_decode(json_encode($listPost),true);
+            // dd($mainData);
+            //co 2 sp tren 1 trang
         $data['keyword']=$keyword;
-        $data['listPost']=json_decode($listPost,true);
+        $data['listPost']=$mainData['data'] ?? [];
+        $data['paginate'] = $listPost;
         // dd($data);
 
     	return view('admin.posts.list-post',$data);
@@ -55,6 +59,8 @@ class PostsController extends Controller
         $language=$request->language;
         $categories =$request->categories;
         $tag = $request->tags;
+        $userId= $request->session()->get('id');
+        //dd($userId);
 
 
         //anh dai dien
@@ -92,6 +98,7 @@ class PostsController extends Controller
             'status'=> $status,
             'publish_date'=>$publishDate,
             'lang_id'=> $language,
+            'user_id'=>$userId,
             'created_at' =>date('Y-m-d H:i:s'),
             'updated_at' => null,
         ];

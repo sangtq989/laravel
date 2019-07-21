@@ -51,6 +51,12 @@
 				@endforeach
 			</tbody>
 		</table>
+		<div class="row justify-content-center boder-top py-3">
+			{{-- hien tri phan trang --}}
+			{{-- phan trang va tim kiem --}}
+			{{-- appen them nhung param  --}}
+			{{ $paginate->appends(request()->query())->links() }}
+		</div>
 		
 	</div>
 

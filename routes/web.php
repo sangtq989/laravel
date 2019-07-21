@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/home',function(){
 	return "hello world - home";
 });
@@ -192,4 +192,12 @@ Route::group([
 	Route::post('/delete-post','PostsController@deletePost')->name('deletePost');
 	Route::get('{slug}/{id}','PostsController@editPost')->name('editPost');
 	Route::post('handle-edit/{id}','PostsController@handleEdit')->name('handleEdit');
+});
+
+/*****************Route blog frontend***********************/
+Route::group([
+	'namespace' => 'Frontend',
+	'as' => 'fr.'
+],function(){
+	Route::get('/','HomeController@index')->name('home');
 });
