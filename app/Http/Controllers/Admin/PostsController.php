@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Categories;
 use App\Models\Tags;
 use App\Http\Requests\StorePosts as Posts;
 use App\Http\Requests\UpdatePost;
@@ -40,7 +40,7 @@ class PostsController extends Controller
 
     	return view('admin.posts.list-post',$data);
     }
-    public function createPosts(Category $cat ,Tags $tag)
+    public function createPosts(Categories $cat ,Tags $tag)
     {
     	//lay all data tu bang categories
     	
@@ -147,7 +147,7 @@ class PostsController extends Controller
             }
         }
     }
-    public function editPost($slug, $id, Request $request, Category $cat ,Tags $tag)
+    public function editPost($slug, $id, Request $request, Categories $cat ,Tags $tag)
     {
        $id = is_numeric($id) && $id>0 ? $id :0;
        //lay du lieu 
