@@ -30,4 +30,15 @@ class Categories extends Model
        $data = Categories::with('posts')->get();
        return $data;
     }
+    public function getDataCateById($id)
+    {
+        $result=[];
+        $data = Categories::find($id);
+        if ($data) {
+            $result = $data->toArray();
+        }
+        return $result;
+        
+    }
+    
 }

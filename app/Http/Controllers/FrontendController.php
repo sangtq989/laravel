@@ -9,10 +9,11 @@ use App\Helper\Common\BuildTreeCate;
 use Illuminate\Support\Facades\Route;
 use App\Models\Categories;
 use App\Models\Tags;
+use App\Models\Posts;
 
 class FrontendController extends Controller
 {
-	public function __construct(Categories $cate, Tags $tag)
+	public function __construct(Categories $cate, Tags $tag, Posts $post)
 	{
 		$data = [];
 		$data['name'] = 'sang blog';
@@ -23,7 +24,8 @@ class FrontendController extends Controller
 		$listCate=json_decode(json_encode($listCate),true);
 		$data['cates'] = BuildTreeCate::layoutTreeCategory($listCate);
 		$data['listCate'] = $cate->countPostCategories();
-		$data['listTag'] = $tag->getAllDataTags();
+		$data['listTag'] = $tag->getAllDataTags();	    
+	    $data['mostViewsPost'] = $post->mostViewPosts(); 
 		// dd($data['listCate']);
     	//dd($listCate);
     	//share du lie cho tat ca view dung chung

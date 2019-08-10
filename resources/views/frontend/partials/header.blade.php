@@ -7,11 +7,13 @@
           <a href="#"><span class="fa fa-facebook"></span></a>
           <a href="#"><span class="fa fa-instagram"></span></a>
           <a href="#"><span class="fa fa-youtube-play"></span></a>
+          <a href=""><span>English</span></a>
+          <a href=""><span>VietNam</span></a>
         </div>
         <div class="col-3 search-top">
           <!-- <a href="#"><span class="fa fa-search"></span></a> -->
           <form action="#" class="search-top-form">
-            <span class="icon fa fa-search"></span>
+            <span id="iconSearch" class="icon fa fa-search"></span>
             <input type="text" id="s" placeholder="Type keyword to search...">
           </form>
         </div>
@@ -23,7 +25,7 @@
     <div class="row pt-5">
       <div class="col-12 text-center">
         <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-        <h1 class="site-logo"><a href="index.html">{{ $info['name'] }}</a></h1>
+        <h1 class="site-logo"><a href="{{ route('fr.home') }}">{{ $info['name'] }}</a></h1>
       </div>
     </div>
   </div>
@@ -35,14 +37,14 @@
           @foreach($info['cates'] as $key => $item)
               @if(empty($item['subChilds']))
                 <li class="nav-item">
-                 <a href="" class="nav-link">{{ $item['name'] }}</a>                    
+                 <a href="{{ route('fr.category',['slug'=>$item['slug'],'id'=>$item['id']]) }}" class="nav-link">{{ $item['name'] }}</a>                    
                </li>
               @else
                  <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="category.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $item['name'] }}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">    
                         @foreach($item['subChilds'] as $key => $item)
-                          <a class="dropdown-item" href="category.html">{{ $item['name'] }}</a>    
+                          <a class="dropdown-item" href="{{ route('fr.category',['slug'=>$item['slug'],'id'=>$item['id']]) }}">{{ $item['name'] }}</a>    
                         @endforeach
                     </div> 
                 </li>                  

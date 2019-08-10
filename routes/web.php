@@ -200,4 +200,11 @@ Route::group([
 	'as' => 'fr.'
 ],function(){
 	Route::get('/','HomeController@index')->name('home');
+	Route::get('{slug}~{id}','DetailController@index')->name('detail');
+	Route::get('lg/{id}','DetailController@updateView')->name('viewCount');
+	Route::get('category/{slug}~{id}','CategoryController@index')->name('category');
+	Route::get('search','SearchController@index')->name('search');
 });
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

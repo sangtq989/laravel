@@ -19,7 +19,7 @@ class HomeController extends FrontendController
 
     	$data['lastestPosts'] = $mainData['data'] ?? [];
     	$data['paginate'] = $lastestPosts;
-    	// dd($data['lastestPost'] );
+    	// dd($mainData);
     	return view('frontend.home.index',$data);
     	# code...
     }
